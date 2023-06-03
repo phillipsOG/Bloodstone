@@ -16,7 +16,7 @@ namespace Bloodstone
 
         private ConfigEntry<bool> _enableReloadCommand;
         private ConfigEntry<string> _reloadCommand;
-        private ConfigEntry<string> _reloadPluginsFolder;
+        private ConfigEntry<string> _reloadBloodstonePluginsFolder;
 
         public BloodstonePlugin() : base()
         {
@@ -24,8 +24,8 @@ namespace Bloodstone
             Instance = this;
 
             _enableReloadCommand = Config.Bind("General", "EnableReloading", true, "Whether to enable the reloading feature (both client and server).");
-            _reloadCommand = Config.Bind("General", "ReloadCommand", "!reload", "Server text command to reload plugins. User must be an admin.");
-            _reloadPluginsFolder = Config.Bind("General", "ReloadablePluginsFolder", "BepInEx/BloodstonePlugins", "The folder to (re)load plugins from, relative to the game directory.");
+            _reloadCommand = Config.Bind("General", "ReloadCommand", "!reload", "Server text command to reload BloodstonePlugins. User must be an admin.");
+            _reloadBloodstonePluginsFolder = Config.Bind("General", "ReloadableBloodstonePluginsFolder", "BepInEx/BloodstoneBloodstonePlugins", "The folder to (re)load BloodstonePlugins from, relative to the game directory.");
         }
 
         public override void Load()
@@ -48,10 +48,10 @@ namespace Bloodstone
 
             Logger.LogInfo($"Bloodstone v{MyPluginInfo.PLUGIN_VERSION} loaded.");
 
-            // NOTE: MUST BE LAST. This initializes plugins that depend on our state being set up.
+            // NOTE: MUST BE LAST. This initializes BloodstonePlugins that depend on our state being set up.
             if (VWorld.IsClient || _enableReloadCommand.Value)
             {
-                Features.Reload.Initialize(_reloadCommand.Value, _reloadPluginsFolder.Value);
+                Features.Reload.Initialize(_reloadCommand.Value, _reloadBloodstonePluginsFolder.Value);
             }
         }
 
