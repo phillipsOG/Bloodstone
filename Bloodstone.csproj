@@ -43,4 +43,7 @@
     <PackageReference Include="Fody" Version="6.6.2" />
     <PackageReference Include="System.Text.Json" Version="6.0.7" />
   </ItemGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy C:\Users\Jason\Desktop\Bloodstone\bin\Debug\net6.0\Bloodstone.dll C:\Users\Jason\Desktop\VRisingDevelopment\VRising_Server\BepInEx\plugins" />
+	</Target>
 </Project>
